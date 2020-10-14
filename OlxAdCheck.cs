@@ -10,7 +10,7 @@ namespace Radz1u
         [FunctionName("OlxAdCheck")]
         public static void Run([TimerTrigger("0 0 4 * * *")]TimerInfo myTimer, ILogger log)
         {
-            log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+            var reader =new  OlxAdsReader();
         }
     }
 }
