@@ -2,12 +2,13 @@ namespace Radz1u.Logic {
     using System.Collections.Generic;
     using System;
     using HtmlAgilityPack;
+    using Radz1u.Configuration;
 
     public class OlxAdExtractor {
         private OlxDateParser _olxDateParser;
-
-        public OlxAdExtractor () {
-            _olxDateParser = new OlxDateParser ();
+        
+        public OlxAdExtractor (OlxConfiguration configuration) {
+            _olxDateParser = new OlxDateParser (configuration);
         }
 
         public IEnumerable<OlxAdContract> Extract (string content) {
