@@ -15,7 +15,7 @@ namespace Radz1u.Logic {
             _olxAdExtractor = new OlxAdExtractor (configuration);
         }
 
-        public async Task<IEnumerable<OlxAdContract>> Read () {
+        public async Task<IEnumerable<OlxAdContract>> ReadAsync () {
             var content = await _httpClient.GetStringAsync (_adUrl);
             return _olxAdExtractor.Extract (content);
         }
