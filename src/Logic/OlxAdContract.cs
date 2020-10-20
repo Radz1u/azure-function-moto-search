@@ -4,7 +4,6 @@ namespace Radz1u.Logic
 
     public class OlxAdContract
     {
-        public string Url{get;set;}
         public DateTime PublishDate{get;set;}
     }
 }

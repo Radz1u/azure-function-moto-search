@@ -3,6 +3,7 @@ namespace Radz1u.Logic {
     using System;
     using HtmlAgilityPack;
     using Radz1u.Configuration;
+    using System.Linq;
 
     public class OlxAdExtractor {
         private OlxDateParser _olxDateParser;
@@ -14,24 +15,26 @@ namespace Radz1u.Logic {
         public IEnumerable<OlxAdContract> Extract (string content) {
             var htmlDocument = new HtmlDocument ();
             htmlDocument.LoadHtml (content);
-            var offers = htmlDocument.DocumentNode.SelectNodes ("//td[@class='offer']");
-            foreach (var offer in offers) {
-                yield return new OlxAdContract {
-                    PublishDate = ExtractPublishDate (offer),
-                        Url = ExtractAdUrl(offer)
-                };
+            var offerNodes = htmlDocument
+            .DocumentNode
+            .SelectNodes ("//div[@class='offer-wrapper']");
+
+            foreach(var offer in offerNodes)
+            {
+                var publishDate = ExtractPublishDate (offer);
+
+                 yield return new OlxAdContract{
+                     PublishDate = publishDate
+                 };
             }
         }
 
         private DateTime ExtractPublishDate (HtmlNode offer) {
-            var clockData = offer.SelectNodes ("//i[@data-icon='clock']") [0];
-            var dateTime = clockData.InnerText;
-            return _olxDateParser.Parse (dateTime);
-        }
+            var clockIconNodes = offer.SelectNodes(".//span//i[@data-icon='clock']");
 
-        private string ExtractAdUrl (HtmlNode offer) {
-            var linkData = offer.SelectNodes ("//a") [0];
-            return linkData.GetAttributeValue ("href", "");
+            var clockIconNode = clockIconNodes.First();
+            var dateTime = clockIconNode.ParentNode.InnerText;
+            return _olxDateParser.Parse (dateTime);
         }
     }
 }

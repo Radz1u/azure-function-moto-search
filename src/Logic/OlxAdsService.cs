@@ -19,7 +19,7 @@ namespace Radz1u.Logic {
             var latestAds = contracts.Where (x => x.PublishDate > DateTime.Today.AddDays (-1));
 
             if (latestAds.Any ()) {
-                await _notificationService.SendAsync (latestAds.Select (x => x.Url));
+                await _notificationService.SendAsync ();
             }
         }
     }
