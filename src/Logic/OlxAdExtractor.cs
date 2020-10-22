@@ -30,9 +30,7 @@ namespace Radz1u.Logic {
         }
 
         private DateTime ExtractPublishDate (HtmlNode offer) {
-            var clockIconNodes = offer.SelectNodes(".//span//i[@data-icon='clock']");
-
-            var clockIconNode = clockIconNodes.First();
+            var clockIconNode = offer.SelectSingleNode(".//span//i[@data-icon='clock']");
             var dateTime = clockIconNode.ParentNode.InnerText;
             return _olxDateParser.Parse (dateTime);
         }

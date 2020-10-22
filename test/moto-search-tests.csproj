@@ -12,6 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\azure-function-moto-search.csproj"/>
+    <ProjectReference Include="..\src\moto-search.csproj"/>
   </ItemGroup>
 </Project>
