@@ -27,7 +27,7 @@ namespace Radz1u.Logic {
                 return ParseYesterday (date);
             }
 
-            return DateTime.ParseExact (formattedDate, "dd MMM",_dateTimeCulture);
+            return DateTime.ParseExact (formattedDate, "d MMM",_dateTimeCulture);
         }
 
         ///There is sometimes double spaces between day and month
@@ -38,15 +38,15 @@ namespace Radz1u.Logic {
         }
 
         private DateTime ParseToday (string date) {
-            var today = date.Replace (_todayPrefix, DateTime.Today.ToString ("dd MMM", _dateTimeCulture));
+            var today = date.Replace (_todayPrefix, DateTime.Today.ToString ("d MMM", _dateTimeCulture));
 
-            return DateTime.ParseExact (today, "dd MMM HH:mm", _dateTimeCulture);
+            return DateTime.ParseExact (today, "d MMM HH:mm", _dateTimeCulture);
         }
 
         private DateTime ParseYesterday (string date) {
             var yesterdayDateTime = DateTime.Today.AddDays (-1);
-            var yesterday = date.Replace (_yesterdayPrefix, yesterdayDateTime.ToString ("dd MMM", _dateTimeCulture));
-            return DateTime.ParseExact (yesterday, "dd MMM HH:mm", _dateTimeCulture);
+            var yesterday = date.Replace (_yesterdayPrefix, yesterdayDateTime.ToString ("d MMM", _dateTimeCulture));
+            return DateTime.ParseExact (yesterday, "d MMM HH:mm", _dateTimeCulture);
         }
     }
 }
