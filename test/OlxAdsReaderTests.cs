@@ -24,6 +24,12 @@ namespace test {
         public async Task When_ReadAsync_Then_The_Collection_NotEmpty () {
             Configure();
             var items = await _reader.ReadAsync();
+
+            foreach(var item in items)  
+            {
+               Assert.True(item.PublishDate < DateTime.Now);
+            }
+
             Assert.NotEmpty(items);
         }
     }

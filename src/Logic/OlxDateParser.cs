@@ -19,15 +19,17 @@ namespace Radz1u.Logic {
                 return DateTime.Now;
             }
 
-            var formattedDate = FormatDate(date); 
-
             if (date.Contains (_todayPrefix)) {
                 return ParseToday (date);
             } else if (date.Contains (_yesterdayPrefix)) {
                 return ParseYesterday (date);
             }
 
-            return DateTime.ParseExact (formattedDate, "d MMM",_dateTimeCulture);
+            var formattedDate = FormatDate(date); 
+            
+            DateTime.TryParseExact (formattedDate, "d MMM",_dateTimeCulture, DateTimeStyles.None, out DateTime resultDate);
+            
+            return resultDate;
         }
 
         ///There is sometimes double spaces between day and month
